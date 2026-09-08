@@ -1,0 +1,10 @@
+# This directory stores video files for camera feeds
+
+# Required videos (download separately due to large size):
+# - cam01.mp4 (Person detection)
+# - cam04.mp4 (Virtual fence)
+# - vehicledetectionanprclass.mp4 (Vehicle ANPR - cam-02)
+# - nightvision.mp4 (Low-light enhancement - cam-03)
+
+# Note: Video files are large and gitignored
+# Store them in this directory before running the backend

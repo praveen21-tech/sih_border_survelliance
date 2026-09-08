@@ -1,0 +1,22 @@
+# Custom ByteTrack configuration for improved tracking stability
+# 
+# Key improvements:
+# - Higher track_high_thresh to prevent false positives
+# - Lower track_low_thresh for better track continuation
+# - Longer track_buffer to keep IDs through occlusions
+# - Higher match_thresh for stricter ID association
+
+tracker_type: bytetrack
+
+# Detection thresholds
+track_high_thresh: 0.6    # High confidence threshold (default: 0.5)
+track_low_thresh: 0.2     # Low confidence threshold for track continuation (default: 0.1)  
+new_track_thresh: 0.7     # Threshold for creating new tracks (default: 0.6)
+
+# Tracking parameters
+track_buffer: 60          # Frames to keep lost tracks (default: 30)
+match_thresh: 0.9         # IoU threshold for matching (default: 0.8)
+fuse_score: True          # Fuse detection scores with track scores
+
+# Frame rate (auto-detected from video, but can be overridden)
+# frame_rate: 24

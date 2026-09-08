@@ -1,0 +1,6 @@
+# This directory stores optional model files
+
+# Optional: License plate detector model
+# - license_plate_detector.pt
+
+# If not present, the system will use fallback plate detection

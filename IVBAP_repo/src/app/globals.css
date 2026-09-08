@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+}
+
+:root {
+  --bg:            #050B14;
+  --panel:         #091522;
+  --panel-hover:   #0d1c2e;
+  --border:        rgba(255,255,255,0.06);
+  --border-med:    rgba(255,255,255,0.10);
+  --text-1:        #FFFFFF;
+  --text-2:        #94A3B8;
+  --text-3:        #4A6080;
+  --accent-green:  #22C55E;
+  --accent-red:    #EF4444;
+  --accent-blue:   #3B82F6;
+  --accent-purple: #A855F7;
+  --accent-yellow: #EAB308;
+  --accent-orange: #F97316;
+}
+
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    color-scheme: dark;
+    /* 10px base → all rem/em values scale down ~23% vs 13px.
+       Combined with tighter px values in components this makes
+       100% browser zoom look like the 67%-zoom screenshot.      */
+    font-size: 10px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text-1);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+    height: 100dvh;
+    width: 100dvw;
+    /* Extra safety: never let the page grow beyond the viewport */
+    max-height: 100dvh;
+  }
+
+  ::-webkit-scrollbar       { width: 3px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.14); }
+}
+
+/* ── Leaflet ─────────────────────────────────────────────────────────────── */
+.leaflet-container { background: #040d18 !important; }
+
+.leaflet-tile-pane {
+  /* Raise brightness from 0.38 → 0.58 so the map terrain is clearly visible
+     while staying dark enough for the heatmap to pop.
+     hue-rotate(180deg) after invert turns the blue sea into a dark teal/green
+     which matches the military topo aesthetic in the reference screenshot.   */
+  filter: invert(1) hue-rotate(180deg) brightness(0.82) saturate(0.65) contrast(0.95);
+}
+
+.leaflet-control-attribution,
+.leaflet-control-zoom { display: none !important; }
+
+.leaflet-popup-content-wrapper {
+  background: rgba(5,11,20,0.97) !important;
+  border: 1px solid rgba(59,130,246,0.3) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.8) !important;
+  color: #e2e8f0 !important;
+  padding: 0 !important;
+}
+.leaflet-popup-content { margin: 0 !important; width: auto !important; }
+.leaflet-popup-tip { background: rgba(5,11,20,0.97) !important; }
+.leaflet-popup-close-button { color: #4A6080 !important; top: 4px !important; right: 5px !important; }
+
+/* ── Camera map tooltips ─────────────────────────────────────────────────── */
+.bordereye-tooltip {
+  background: rgba(5,11,20,0.95) !important;
+  border: 1px solid rgba(59,130,246,0.35) !important;
+  border-radius: 4px !important;
+  color: #e2e8f0 !important;
+  font-size: 8px !important;
+  line-height: 1.4 !important;
+  padding: 3px 7px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.6) !important;
+  white-space: nowrap;
+}
+.bordereye-tooltip::before { display: none !important; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}

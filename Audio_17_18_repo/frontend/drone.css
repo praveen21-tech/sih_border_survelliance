@@ -1,0 +1,372 @@
+/* =============================================================================
+   BorderEye — Module 18 Drone Detection  |  Dedicated panel styles
+   Extends styles.css — no duplication of shared tokens
+   ============================================================================= */
+
+/* ── Nav tabs ────────────────────────────────────────────────────────────── */
+.module-nav {
+  display: flex;
+  background: var(--navy-2);
+  border-bottom: 2px solid var(--chakra);
+  padding: 0 20px;
+  gap: 2px;
+}
+.nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: color .12s, border-color .12s;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.nav-tab:hover  { color: rgba(255,255,255,0.85); }
+.nav-tab.active { color: #FFFFFF; border-bottom-color: var(--saffron); }
+.nav-icon { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* ── Early Warning badge in status bar ───────────────────────────────────── */
+.ew-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  padding: 2px 10px;
+  border-radius: var(--r);
+  border: 1px solid;
+  white-space: nowrap;
+}
+.ew-NONE     { background: #F0F2F7;          color: var(--text-muted); border-color: var(--border); }
+.ew-WATCH    { background: #FFF9C4;          color: #7B5800;           border-color: #FFE082; }
+.ew-ALERT    { background: var(--high-lt);   color: var(--high);       border-color: var(--high-bd); }
+.ew-CRITICAL { background: var(--crit-lt);   color: var(--crit);       border-color: var(--crit-bd);
+               animation: pulse-thr 1.6s ease-in-out infinite; }
+
+/* ── Main drone grid ─────────────────────────────────────────────────────── */
+.drone-grid {
+  display: grid;
+  grid-template-columns: 1fr 290px;
+  grid-template-rows: auto;
+  gap: 12px;
+  padding: 12px 16px 32px;
+  align-items: start;
+}
+
+/* KPI row spans full width */
+.drone-kpi-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 200px repeat(4, 1fr);
+  gap: 10px;
+}
+
+/* Row 2: vision card (left) + right-stack (compass + timeline) */
+.drone-vision-card   { grid-column: 1; grid-row: 2; min-width: 0; }
+.drone-right-stack   { grid-column: 2; grid-row: 2; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+
+/* Row 3: threat board — full width */
+.drone-threat-board  { grid-column: 1 / -1; grid-row: 3; }
+
+/* Row 4: classification left, profile right */
+.drone-class-card    { grid-column: 1; grid-row: 4; }
+.drone-profile-card  { grid-column: 2; grid-row: 4; }
+
+/* Row 5: track history + physics */
+.drone-track-card    { grid-column: 1; grid-row: 5; }
+.drone-physics-card  { grid-column: 2; grid-row: 5; }
+
+/* ── Early Warning KPI ───────────────────────────────────────────────────── */
+.kpi-ew { border-top-color: var(--chakra) !important; }
+.kpi-ew-level {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: var(--mono);
+  letter-spacing: .08em;
+  line-height: 1;
+  color: var(--navy);
+}
+.kpi-ew-level.WATCH    { color: #7B5800; }
+.kpi-ew-level.ALERT    { color: var(--high); }
+.kpi-ew-level.CRITICAL { color: var(--crit); animation: pulse-thr 1.6s ease-in-out infinite; }
+
+/* ── Threat list ─────────────────────────────────────────────────────────── */
+.threat-list { max-height: 320px; overflow-y: auto; }
+.threat-item {
+  display: grid;
+  grid-template-columns: 3px 1fr auto;
+  gap: 0 10px;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border-lt);
+  align-items: start;
+}
+.threat-item:last-child { border-bottom: none; }
+.threat-bar { width: 3px; border-radius: 2px; align-self: stretch; min-height: 32px; }
+.threat-bar.CRITICAL { background: var(--crit); }
+.threat-bar.HIGH     { background: var(--high); }
+.threat-bar.MEDIUM   { background: var(--medium); }
+.threat-content { min-width: 0; }
+.threat-post  { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
+.threat-class { font-size: 12px; font-weight: 700; color: var(--text); margin-top: 2px; }
+.threat-class-hi { font-family: var(--font-dev); font-size: 10px; color: var(--text-muted); }
+.threat-meta  { font-size: 10px; color: var(--text-muted); margin-top: 3px; font-family: var(--mono); }
+.threat-action{ font-size: 10px; color: var(--text-2); margin-top: 3px; line-height: 1.4; }
+.threat-score-badge {
+  flex-shrink: 0;
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: var(--r);
+  border: 1px solid;
+  white-space: nowrap;
+}
+.score-CRITICAL { background: var(--crit-lt); color: var(--crit); border-color: var(--crit-bd); }
+.score-HIGH     { background: var(--high-lt); color: var(--high); border-color: var(--high-bd); }
+.score-MEDIUM   { background: var(--medium-lt); color: var(--medium); border-color: var(--medium-bd); }
+.score-LOW      { background: var(--low-lt);   color: var(--low);    border-color: var(--low-bd); }
+
+/* ── Camera tracking ─────────────────────────────────────────────────────── */
+.compass-wrap { display: flex; justify-content: center; margin-bottom: 10px; }
+.compass-rose { width: 160px; height: 160px; display: block; }
+
+.ptz-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.ptz-param {
+  background: #F4F6FB;
+  border: 1px solid var(--border-lt);
+  border-radius: var(--r);
+  padding: 6px 8px;
+  text-align: center;
+}
+.ptz-label { font-size: 9px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
+.ptz-value { font-size: 15px; font-weight: 700; font-family: var(--mono); color: var(--navy); margin-top: 3px; }
+
+.cam-priority-badge {
+  margin-left: auto; flex-shrink: 0;
+  padding: 3px 10px; border-radius: var(--r);
+  font-size: 10px; font-weight: 700; letter-spacing: .1em; border: 1px solid;
+  background: var(--low-lt); color: var(--low); border-color: var(--low-bd);
+}
+.cam-priority-badge.ELEVATED  { background: var(--high-lt); color: var(--high); border-color: var(--high-bd); }
+.cam-priority-badge.IMMEDIATE { background: var(--crit-lt); color: var(--crit); border-color: var(--crit-bd);
+                                  animation: pulse-thr 1.6s ease-in-out infinite; }
+
+.cam-action-note {
+  background: var(--navy-lt);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--navy);
+  border-radius: var(--r);
+  padding: 7px 10px;
+  font-size: 11px;
+  color: var(--navy);
+  line-height: 1.5;
+}
+.cam-action-note.immediate {
+  background: var(--crit-lt);
+  border-color: var(--crit-bd);
+  border-left-color: var(--crit);
+  color: #7B0000;
+  font-weight: 600;
+}
+
+/* ── Timeline canvas ─────────────────────────────────────────────────────── */
+#timelineChart { display: block; width: 100%; }
+.timeline-legend {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.tl-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+.tl-crit  { background: var(--crit); }
+.tl-alert { background: var(--high); }
+.tl-watch { background: #F5C842; }
+
+/* ── Classification result ───────────────────────────────────────────────── */
+.class-empty { color: var(--text-light); font-style: italic; font-size: 12px; padding: 16px 0; text-align: center; }
+
+.class-result-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--border-lt);
+}
+.class-label-block { flex: 1; min-width: 0; }
+.class-name-en { font-size: 14px; font-weight: 700; color: var(--text); }
+.class-name-hi { font-family: var(--font-dev); font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.class-frame   { font-size: 10px; color: var(--text-light); margin-top: 2px; font-family: var(--mono); text-transform: uppercase; }
+
+.class-tier-badge {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border-radius: var(--r);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  border: 1px solid;
+}
+.tier-CRITICAL { background: var(--crit-lt); color: var(--crit); border-color: var(--crit-bd); }
+.tier-HIGH     { background: var(--high-lt); color: var(--high); border-color: var(--high-bd); }
+.tier-MEDIUM   { background: var(--medium-lt); color: var(--medium); border-color: var(--medium-bd); }
+.tier-NONE     { background: var(--low-lt);   color: var(--low);   border-color: var(--low-bd); }
+
+.vote-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.vote-item { background: #F4F6FB; border: 1px solid var(--border-lt); border-radius: var(--r); padding: 6px 8px; }
+.vote-name  { font-size: 9px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
+.vote-score { font-size: 14px; font-weight: 700; font-family: var(--mono); color: var(--navy); margin-top: 3px; }
+.vote-bar   { height: 3px; background: var(--border-lt); border-radius: 99px; margin-top: 4px; overflow: hidden; }
+.vote-fill  { height: 100%; border-radius: 99px; background: var(--navy); }
+
+/* ── Profile catalogue table ─────────────────────────────────────────────── */
+.tier-badge-sm {
+  font-size: 9px; font-weight: 700; letter-spacing: .07em;
+  padding: 1px 6px; border-radius: 2px; border: 1px solid;
+}
+.tier-sm-CRITICAL { background: var(--crit-lt); color: var(--crit); border-color: var(--crit-bd); }
+.tier-sm-HIGH     { background: var(--high-lt); color: var(--high); border-color: var(--high-bd); }
+.tier-sm-MEDIUM   { background: var(--medium-lt); color: var(--medium); border-color: var(--medium-bd); }
+
+/* ── Track history table ─────────────────────────────────────────────────── */
+.track-filter-label {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; color: var(--text-muted); font-weight: 600;
+  cursor: pointer; white-space: nowrap;
+}
+.track-filter-label input { cursor: pointer; }
+.ew-badge-sm {
+  font-size: 9px; font-weight: 700; letter-spacing: .07em;
+  padding: 1px 5px; border-radius: 2px; border: 1px solid;
+  display: inline-block; white-space: nowrap;
+}
+.ew-sm-NONE     { background: #F0F2F7; color: var(--text-light); border-color: var(--border); }
+.ew-sm-WATCH    { background: #FFF9C4; color: #7B5800; border-color: #FFE082; }
+.ew-sm-ALERT    { background: var(--high-lt); color: var(--high); border-color: var(--high-bd); }
+.ew-sm-CRITICAL { background: var(--crit-lt); color: var(--crit); border-color: var(--crit-bd); }
+
+/* ── Physics grid ────────────────────────────────────────────────────────── */
+.physics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 7px;
+}
+.phys-item { background: #F4F6FB; border: 1px solid var(--border-lt); border-radius: var(--r); padding: 7px 10px; }
+.phys-label { font-size: 9px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .07em; white-space: nowrap; }
+.phys-value { font-size: 14px; font-weight: 700; font-family: var(--mono); color: var(--navy); margin-top: 3px; }
+.phys-bar   { height: 3px; background: var(--border-lt); border-radius: 99px; margin-top: 4px; overflow: hidden; }
+.phys-fill  { height: 100%; border-radius: 99px; background: var(--navy); }
+
+/* ── Camera Vision Panel ─────────────────────────────────────────────────── */
+.cam-source-row {
+  display: flex; gap: 12px; align-items: flex-end;
+  margin-bottom: 10px; flex-wrap: wrap;
+}
+.cam-source-group { display: flex; flex-direction: column; gap: 4px; }
+.cam-ip-group     { flex: 1; min-width: 200px; }
+.cam-source-btns  { display: flex; gap: 6px; }
+.btn-sm           { padding: 6px 11px; font-size: 11px; }
+
+.cam-ip-row {
+  display: flex; gap: 6px;
+}
+.form-input {
+  flex: 1; padding: 7px 10px;
+  border: 1px solid var(--border); border-radius: var(--r);
+  font-family: var(--mono); font-size: 11px; color: var(--text);
+  background: var(--white);
+}
+.form-input:focus { outline: 2px solid var(--navy); outline-offset: 1px; }
+.form-input::placeholder { color: var(--text-light); }
+
+.cam-source-list {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.cam-source-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; background: var(--navy-lt);
+  border: 1px solid var(--border); border-radius: 99px;
+  font-size: 11px; font-weight: 600; color: var(--navy);
+}
+.cam-source-chip.active { background: var(--green-lt); border-color: var(--low-bd); color: var(--green); }
+.cam-source-chip.error  { background: var(--crit-lt); border-color: var(--crit-bd); color: var(--crit); }
+.cam-chip-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.cam-chip-remove {
+  cursor: pointer; color: var(--text-light); font-weight: 700;
+  line-height: 1; padding: 0 2px;
+}
+.cam-chip-remove:hover { color: var(--crit); }
+
+.cam-status-pill {
+  margin-left: auto; flex-shrink: 0;
+  padding: 3px 10px; border-radius: 99px;
+  font-size: 10px; font-weight: 700; letter-spacing: .08em; border: 1px solid;
+  background: #F0F2F7; color: var(--text-light); border-color: var(--border);
+}
+.cam-status-pill.live    { background: var(--green-lt); color: var(--green); border-color: var(--low-bd); animation: pulse-thr 2s ease-in-out infinite; }
+.cam-status-pill.warning { background: var(--high-lt);  color: var(--high);  border-color: var(--high-bd); }
+.cam-status-pill.threat  { background: var(--crit-lt);  color: var(--crit);  border-color: var(--crit-bd); animation: pulse-thr 1.4s ease-in-out infinite; }
+
+/* Feed container */
+.cam-feed-wrap {
+  position: relative; background: #0A0E18;
+  border-radius: var(--r); overflow: hidden;
+  min-height: 260px; border: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.cam-feed-img {
+  width: 100%; display: block; object-fit: contain;
+  max-height: 400px;
+}
+.cam-feed-placeholder {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px; padding: 24px; text-align: center;
+}
+.cam-placeholder-icon { width: 52px; height: 52px; }
+.cam-placeholder-text { font-size: 11px; color: #5A6A7C; max-width: 240px; line-height: 1.5; }
+
+/* Overlay stats bar (absolute on top of video) */
+.cam-overlay-bar {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(0,20,50,0.80);
+  display: flex; gap: 0; border-top: 1px solid rgba(255,255,255,0.10);
+}
+.cam-overlay-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  padding: 4px 6px; border-right: 1px solid rgba(255,255,255,0.08);
+}
+.cam-overlay-item:last-child { border-right: none; }
+.cam-overlay-label { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: .07em; }
+.cam-overlay-val   { font-size: 13px; font-weight: 700; font-family: var(--mono); color: #FFFFFF; margin-top: 1px; }
+.cam-overlay-val.alert   { color: #FFB020; }
+.cam-overlay-val.threat  { color: #FF4D4D; }
+
+/* YOLO detection list below feed */
+.cam-det-list {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 8px; min-height: 28px;
+}
+.cam-det-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 8px; border-radius: var(--r);
+  font-size: 10px; font-weight: 700; border: 1px solid; white-space: nowrap;
+}
+.det-drone    { background: var(--crit-lt); color: var(--crit); border-color: var(--crit-bd); }
+.det-airplane { background: var(--high-lt); color: var(--high); border-color: var(--high-bd); }
+.det-bird     { background: var(--medium-lt); color: var(--medium); border-color: var(--medium-bd); }
+.det-other    { background: #F0F2F7; color: var(--text-muted); border-color: var(--border); }
+.det-conf { font-weight: 400; opacity: .8; }

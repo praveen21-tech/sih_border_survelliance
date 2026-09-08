@@ -1,0 +1,6 @@
+# This directory stores runtime data
+# - watchlist.json (face embeddings)
+# - face_alerts.json (alert log)
+# - cam-*_fence.json (fence configurations)
+
+# Files in this directory are generated at runtime and gitignored

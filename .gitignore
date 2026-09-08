@@ -1,0 +1,69 @@
+﻿# Dependencies
+node_modules/
+*/node_modules/
+.pnp
+.pnp.js
+
+# Next.js build output
+.next/
+*/.next/
+out/
+build/
+dist/
+
+# Python & Virtual Envs
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+deployment/
+
+# Environment variables & secrets
+.env
+.env*.local
+*.pem
+*.key
+
+# Large Media files (>10MB / CCTV recordings)
+*.mp4
+*.mp4.zip
+*.zip
+*.tar
+*.gz
+*.avi
+*.mkv
+*.mov
+*.mpeg
+*.mp3
+*.wav
+
+# Model weights
+*.pt
+*.pth
+*.onnx
+*.engine
+*.bin
+*.pkl
+
+# SQLite databases & cache
+surveillance.db
+*.db
+*.sqlite3
+data/embeddings/
+data/cache/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

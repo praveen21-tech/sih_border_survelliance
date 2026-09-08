@@ -1,0 +1,188 @@
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+.virtualenv/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# ── Node.js / Next.js ───────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Next.js
+.next/
+out/
+build/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# ── Frontend Build Artifacts ────────────────────────────────────────────────
+dist/
+.cache/
+public/build/
+
+# ── Backend Data & Logs ─────────────────────────────────────────────────────
+# Runtime logs
+*.log
+server.log
+server.err.log
+backend/server.log
+backend/server.err.log
+backend/*.log
+boot*.log
+debug*.log
+se*.log
+so*.log
+srv.*
+
+# Process IDs
+*.pid
+server.pid
+
+# Database files (runtime generated)
+backend/data/*.json
+!backend/data/.gitkeep
+
+# Alert logs
+backend/data/face_alerts.json
+
+# ── AI Models & Weights ─────────────────────────────────────────────────────
+# YOLO weights (large files, download separately)
+backend/weights/*.pt
+backend/weights/*_openvino_model/
+!backend/weights/.gitkeep
+
+# InsightFace models (downloaded at runtime)
+*.onnx
+*.params
+*.bin
+
+# Plate detector model (optional)
+backend/models/*.pt
+!backend/models/.gitkeep
+
+# EasyOCR models (stored on D: drive)
+D:/easyocr-models/
+
+# ── Video Files ─────────────────────────────────────────────────────────────
+# Large video files (download separately or use test videos)
+*.mp4
+*.webm
+*.avi
+*.mov
+!public/.gitkeep
+
+# Allow specific small test videos if needed (uncomment to include)
+# !public/test-video.mp4
+
+# ── Training Data ───────────────────────────────────────────────────────────
+# Personal face photos (sensitive data)
+mybeautifulface/
+training_images/
+*.jpg
+*.jpeg
+*.png
+!src/**/*.png
+!src/**/*.jpg
+!public/**/*.svg
+!public/*.svg
+
+# ── Environment & Secrets ───────────────────────────────────────────────────
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ── OS Generated ────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+desktop.ini
+
+# ── Git ─────────────────────────────────────────────────────────────────────
+*.orig
+
+# ── IDEs ────────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ── Testing ─────────────────────────────────────────────────────────────────
+.coverage
+.pytest_cache/
+htmlcov/
+.tox/
+
+# ── Temporary Files ─────────────────────────────────────────────────────────
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# ── Documentation Builds ────────────────────────────────────────────────────
+docs/_build/
+
+# ── Package Lock Files (keep these) ─────────────────────────────────────────
+# Keep package-lock.json for reproducible builds
+# !package-lock.json
+
+# ── Notes ───────────────────────────────────────────────────────────────────
+# What TO INCLUDE (not ignored):
+# - Source code (*.py, *.ts, *.tsx, *.js, *.jsx)
+# - Configuration files (*.json, *.yaml, *.toml, *.md)
+# - Requirements files (requirements.txt, package.json)
+# - Documentation (*.md, README)
+# - Static assets (*.svg in public/)
+# - Scripts (*.ps1, *.sh)
+# - Git config (.gitignore, .gitattributes)
+
+# What to EXCLUDE (ignored):
+# - Large video files (download separately)
+# - AI model weights (download from official sources)
+# - Personal training photos
+# - Runtime logs and databases
+# - Build artifacts
+# - Dependencies (node_modules, .venv)

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Surveillance Intelligence Center | Multi-Camera Re-ID & Video Forensics</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Marked.js for Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #f1f5f9;
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .prose pre {
+            background-color: #0f172a;
+            border: 1px solid #1e293b;
+            padding: 0.85rem;
+            border-radius: 0.5rem;
+            color: #38bdf8;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            overflow-x: auto;
+        }
+        .prose table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        .prose th, .prose td {
+            border: 1px solid #334155;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.82rem;
+        }
+        .prose th {
+            background-color: #1e293b;
+            color: #93c5fd;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur-md px-6 py-3.5 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+                    <i class="fa-solid fa-shield-halved text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-base font-bold text-white tracking-tight flex items-center gap-2">
+                        AI Surveillance Intelligence Center
+                        <span class="text-[11px] font-normal px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Feature 13 Dual Re-ID Live</span>
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Badges -->
+            <div class="flex items-center space-x-4 text-xs text-slate-300">
+                <div class="flex items-center space-x-2 bg-slate-950/60 px-3 py-1.5 rounded-full border border-slate-800">
+                    <i class="fa-solid fa-camera text-emerald-400"></i>
+                    <span class="font-mono text-emerald-400">cam1.mp4 & cam2.mp4 Ready</span>
+                </div>
+                <div class="flex items-center space-x-2 bg-slate-950/60 px-3 py-1.5 rounded-full border border-slate-800">
+                    <i class="fa-solid fa-brain text-purple-400"></i>
+                    <span class="text-slate-400">Groq Qwen AI Ready</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto w-full p-4 sm:p-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Column: Dual Multi-Camera Re-ID Synchronized Player (6 Cols) -->
+        <div class="lg:col-span-6 space-y-5">
+
+            <!-- Dual Synchronized Player (Feature 13) -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                            <i class="fa-solid fa-network-wired text-blue-400"></i> Multi-Camera Re-ID (cam1 & cam2)
+                        </h2>
+                        <p class="text-[10px] text-slate-500 mt-0.5">Simultaneous tracking across Plaza (Cam 1) and Steps Entrance (Cam 2)</p>
+                    </div>
+                    <span id="reid-badge" class="text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold uppercase">
+                        RE-ID ACTIVE
+                    </span>
+                </div>
+
+                <!-- Dual Video Grid (cam1.mp4 & cam2.mp4) -->
+                <div class="grid grid-cols-2 gap-3">
+                    
+                    <!-- Camera 1: cam1.mp4 (Plaza Wide View) -->
+                    <div class="relative aspect-video bg-black rounded-xl overflow-hidden border border-emerald-500/40 shadow-lg shadow-emerald-500/5">
+                        <video id="video-cam1" src="/recordings/cam1.mp4" playsinline muted class="w-full h-full object-cover"></video>
+                        <div class="absolute top-1.5 left-2 bg-black/80 px-2 py-0.5 rounded text-[10px] text-emerald-400 font-mono font-bold flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> CAM 1: PLAZA (WIDE)
+                        </div>
+                    </div>
+
+                    <!-- Camera 2: cam2.mp4 (Steps Close View) -->
+                    <div class="relative aspect-video bg-black rounded-xl overflow-hidden border border-blue-500/40 shadow-lg shadow-blue-500/5">
+                        <video id="video-cam2" src="/recordings/cam2.mp4" playsinline muted class="w-full h-full object-cover"></video>
+                        <div class="absolute top-1.5 left-2 bg-black/80 px-2 py-0.5 rounded text-[10px] text-blue-400 font-mono font-bold flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> CAM 2: STEPS (CLOSE)
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Synchronized Video Controls -->
+                <div class="flex items-center gap-2">
+                    <button id="btn-play-dual" class="flex-1 py-2.5 px-4 bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20 transition">
+                        <i class="fa-solid fa-play"></i> Play Dual Synchronized Streams
+                    </button>
+                    <button id="btn-restart-dual" class="py-2.5 px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium rounded-xl transition">
+                        <i class="fa-solid fa-rotate-left"></i> Restart
+                    </button>
+                </div>
+
+                <!-- Active Re-ID Matches in cam1 & cam2 -->
+                <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-2.5 text-xs">
+                    <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+                        <span><i class="fa-solid fa-users text-emerald-400 mr-1.5"></i> Tracked Crowd & Re-ID Identities (<span id="count-persons">12</span> Total)</span>
+                        <span class="font-mono text-emerald-400 text-[10px]">Cosine Sim > 88%</span>
+                    </div>
+
+                    <!-- Scrollable Container for All Mapped Individuals -->
+                    <div id="tracked-persons-list" class="space-y-1.5 max-h-56 overflow-y-auto pr-1">
+                        <!-- Populated dynamically via JS -->
+                        <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-between">
+                            <span class="text-slate-400 text-xs"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Loading tracked individuals...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drag & Drop Alternate Video File -->
+                <div id="video-dropzone" class="border border-dashed border-slate-800 hover:border-blue-500/60 rounded-xl p-3 text-center cursor-pointer transition bg-slate-950/40">
+                    <input type="file" id="video-file-input" accept="video/*" class="hidden">
+                    <p class="text-xs text-slate-300 font-medium"><i class="fa-solid fa-cloud-arrow-up mr-1 text-slate-500"></i> Or Drag & Drop other video files here</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Column: Cross-Camera Trajectory & Natural Language Q&A (6 Cols) -->
+        <div class="lg:col-span-6 space-y-5">
+
+            <!-- Cross-Camera Trajectory Timeline (Feature 13) -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-route text-emerald-400"></i> Reconstructed Movement Trajectory (<span id="active-traj-person" class="text-white">PERSON_001</span>)
+                    </h2>
+                    <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">Live Timeline</span>
+                </div>
+
+                <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-800 space-y-3">
+                    <div class="text-xs font-mono text-emerald-400 flex items-center gap-2">
+                        <i class="fa-solid fa-location-arrow"></i>
+                        <span id="live-traj-path">CAM_02_STEPS (Entrance View) ➔ CAM_01_PLAZA (Wide View)</span>
+                    </div>
+
+                    <div id="live-timeline-nodes" class="space-y-2 relative pl-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-emerald-500/30 text-xs">
+                        <!-- Trajectory nodes rendered dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Natural Language Forensics Q&A (Feature 12) -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-robot text-purple-400"></i> Ask Questions About cam1 & cam2
+                    </h2>
+                    <span class="text-[10px] px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">Qwen 27B AI</span>
+                </div>
+
+                <!-- Scenario Chips -->
+                <div class="flex flex-wrap gap-1.5">
+                    <button class="text-[11px] bg-slate-800 hover:bg-slate-700 active:scale-[0.98] text-slate-300 px-3 py-1 rounded-full border border-slate-700/80 transition q-chip"
+                            data-query="What time did each person cross from cam2 (Steps) to cam1 (Plaza), and what was their transit duration?">
+                        ⏱️ Camera Crossing Times & Transit Durations
+                    </button>
+                    <button class="text-[11px] bg-slate-800 hover:bg-slate-700 active:scale-[0.98] text-slate-300 px-3 py-1 rounded-full border border-slate-700/80 transition q-chip"
+                            data-query="How does the system identify whether a person detected in cam1 is the same person from cam2, and what are their Re-ID scores?">
+                        🔍 Verify Same Person vs New Person
+                    </button>
+                    <button class="text-[11px] bg-slate-800 hover:bg-slate-700 active:scale-[0.98] text-slate-300 px-3 py-1 rounded-full border border-slate-700/80 transition q-chip"
+                            data-query="Show the full chronological crossing timeline for PERSON_001, PERSON_002, and PERSON_003 with exact timestamps.">
+                        📋 Crossing Timeline (PERSON 1, 2, 3)
+                    </button>
+                </div>
+
+                <!-- Query Input Bar -->
+                <div class="flex gap-2 pt-1">
+                    <div class="relative flex-1">
+                        <i class="fa-solid fa-circle-question absolute left-3.5 top-3.5 text-slate-500 text-xs"></i>
+                        <input type="text" id="query-input" 
+                               placeholder="Ask anything about camera crossings & Re-ID (e.g. 'What time did PERSON_001 cross each camera?')"
+                               class="w-full bg-slate-950 border border-slate-800 focus:border-blue-500 rounded-xl pl-9 pr-4 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none transition">
+                    </div>
+                    <button id="btn-submit-query" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white text-xs font-semibold rounded-xl flex items-center gap-2 shadow-lg shadow-blue-500/20 transition">
+                        <i class="fa-solid fa-paper-plane"></i> Ask AI
+                    </button>
+                </div>
+
+                <!-- Results Output Panel -->
+                <div id="results-panel" class="hidden mt-3 p-4 bg-slate-950/90 rounded-xl border border-slate-800 space-y-2">
+                    <div class="text-[10px] uppercase font-bold text-purple-400">AI Intelligence Forensics Report:</div>
+                    <div id="res-markdown" class="prose max-w-none text-xs text-slate-200 leading-relaxed"></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Client Script -->
+    <script>
+        const v1 = document.getElementById('video-cam1');
+        const v2 = document.getElementById('video-cam2');
+        const playBtn = document.getElementById('btn-play-dual');
+        const restartBtn = document.getElementById('btn-restart-dual');
+        let isPlaying = false;
+        let allPersonsData = [];
+
+        playBtn.addEventListener('click', () => {
+            if (!isPlaying) {
+                v1.play();
+                v2.play();
+                isPlaying = true;
+                playBtn.innerHTML = `<i class="fa-solid fa-pause"></i> Pause Synchronized Streams`;
+                playBtn.className = "flex-1 py-2.5 px-4 bg-amber-600 hover:bg-amber-500 active:scale-[0.98] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition";
+            } else {
+                v1.pause();
+                v2.pause();
+                isPlaying = false;
+                playBtn.innerHTML = `<i class="fa-solid fa-play"></i> Play Dual Synchronized Streams`;
+                playBtn.className = "flex-1 py-2.5 px-4 bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20 transition";
+            }
+        });
+
+        restartBtn.addEventListener('click', () => {
+            v1.currentTime = 0;
+            v2.currentTime = 0;
+            if (isPlaying) {
+                v1.play();
+                v2.play();
+            }
+        });
+
+        // Fetch and load all tracked persons dynamically
+        async function loadTrackedPersons() {
+            try {
+                const res = await fetch('/api/v1/reid/trajectories?limit=25');
+                const trajectories = await res.json();
+                allPersonsData = trajectories;
+
+                const listEl = document.getElementById('tracked-persons-list');
+                const countEl = document.getElementById('count-persons');
+                countEl.textContent = trajectories.length;
+
+                if (!trajectories || trajectories.length === 0) {
+                    listEl.innerHTML = `<div class="p-2 text-slate-500">No tracked individuals found.</div>`;
+                    return;
+                }
+
+                listEl.innerHTML = '';
+                trajectories.forEach((t, idx) => {
+                    const pid = t.person_id || t.global_person_id || `PERSON_${String(idx+1).padStart(3, '0')}`;
+                    const div = document.createElement('div');
+                    div.className = `p-2 rounded-lg border transition cursor-pointer flex items-center justify-between ${idx === 0 ? 'bg-slate-900/90 border-blue-500/60' : 'bg-slate-900 border-slate-800 hover:border-slate-700'}`;
+                    div.innerHTML = `
+                        <div class="flex-1 pr-2">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-white">${pid}</span>
+                                <span class="text-[10px] text-slate-400 font-mono">(${t.total_sightings || 0} sightings)</span>
+                            </div>
+                            <div class="text-slate-400 text-[11px] truncate max-w-[280px]" title="${t.appearance_description || ''}">
+                                ${t.appearance_description || 'Pedestrian'}
+                            </div>
+                        </div>
+                        <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-mono font-bold whitespace-nowrap">
+                            Cam 2 ➔ Cam 1
+                        </span>
+                    `;
+                    div.addEventListener('click', () => {
+                        selectPerson(t);
+                        document.querySelectorAll('#tracked-persons-list > div').forEach(el => {
+                            el.className = 'p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 transition cursor-pointer flex items-center justify-between';
+                        });
+                        div.className = 'p-2 rounded-lg bg-slate-900/90 border border-blue-500/60 transition cursor-pointer flex items-center justify-between';
+                    });
+                    listEl.appendChild(div);
+                });
+
+                if (trajectories.length > 0) {
+                    selectPerson(trajectories[0]);
+                }
+            } catch (err) {
+                console.error("Failed to load trajectories:", err);
+            }
+        }
+
+        function selectPerson(traj) {
+            const pid = traj.person_id || traj.global_person_id || "PERSON_001";
+            document.getElementById('active-traj-person').textContent = pid;
+            document.getElementById('live-traj-path').textContent = traj.zone_path_summary ? `${traj.timeline?.[0]?.camera_id || 'CAM_02_STEPS'} ➔ ${traj.timeline?.[traj.timeline.length-1]?.camera_id || 'CAM_01_PLAZA'}` : "CAM_02_STEPS ➔ CAM_01_PLAZA";
+
+            const timelineEl = document.getElementById('live-timeline-nodes');
+            timelineEl.innerHTML = '';
+
+            const crossings = traj.camera_crossings || [];
+            if (crossings.length > 0) {
+                crossings.forEach((c, idx) => {
+                    const nodeDiv = document.createElement('div');
+                    nodeDiv.className = "bg-slate-900 p-3 rounded-xl border border-slate-800 space-y-1.5";
+                    
+                    const isFirst = (idx === 0);
+                    const matchBadge = isFirst 
+                        ? `<span class="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono font-bold">INITIAL DETECTION</span>`
+                        : `<span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-mono font-bold"><i class="fa-solid fa-circle-check mr-1"></i>SAME PERSON (${c.reid_similarity_percent})</span>`;
+
+                    const transitInfo = c.transit_from_previous_camera 
+                        ? `<div class="text-[11px] text-amber-400 font-mono flex items-center gap-1 mt-1"><i class="fa-solid fa-person-walking-arrow-right"></i> Transit duration from previous camera: <strong>${c.transit_from_previous_camera}</strong></div>`
+                        : '';
+
+                    nodeDiv.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full ${isFirst ? 'bg-blue-400' : 'bg-emerald-400'}"></span>
+                                <span class="font-bold text-white">${c.camera_name || c.camera_id}</span>
+                            </div>
+                            ${matchBadge}
+                        </div>
+                        <div class="flex items-center justify-between text-slate-400 text-[11px] font-mono">
+                            <span>Zone: <strong class="text-slate-200">${c.zone}</strong></span>
+                            <span>Crossed: <strong class="text-emerald-400">${c.entry_time}</strong> ${c.exit_time !== c.entry_time ? '➔ ' + c.exit_time : ''}</span>
+                        </div>
+                        ${transitInfo}
+                    `;
+                    timelineEl.appendChild(nodeDiv);
+                });
+            } else {
+                // Fallback rendering
+                const nodes = traj.timeline || [];
+                const camSteps = {};
+                nodes.forEach(n => {
+                    if (!camSteps[n.camera_id]) camSteps[n.camera_id] = n;
+                });
+
+                Object.values(camSteps).forEach(n => {
+                    const nodeDiv = document.createElement('div');
+                    nodeDiv.className = "bg-slate-900 p-2.5 rounded-xl border border-slate-800";
+                    nodeDiv.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-white">${n.camera_id === 'CAM_02_STEPS' ? 'Camera 2 (Entrance & Steps)' : 'Camera 1 (Central Plaza)'}</span>
+                            <span class="text-slate-400 font-mono text-[10px]">Zone: ${n.zone}</span>
+                        </div>
+                        <div class="text-slate-400 text-[11px] mt-0.5">
+                            Crossed at ${n.timestamp_display || n.timestamp} | Match: <span class="text-emerald-400 font-mono font-bold">${Math.round((n.reid_similarity || 0.92) * 100)}%</span>
+                        </div>
+                    `;
+                    timelineEl.appendChild(nodeDiv);
+                });
+            }
+        }
+
+        // Query Handlers
+        document.querySelectorAll('.q-chip').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.getElementById('query-input').value = btn.dataset.query;
+                executeQuery();
+            });
+        });
+
+        document.getElementById('btn-submit-query').addEventListener('click', executeQuery);
+        document.getElementById('query-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') executeQuery();
+        });
+
+        async function executeQuery() {
+            const query = document.getElementById('query-input').value.trim();
+            if (!query) return;
+
+            const btn = document.getElementById('btn-submit-query');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Analyzing...`;
+            btn.disabled = true;
+
+            try {
+                const res = await fetch('/api/v1/video/ask', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        video_filename: "cam2.mp4",
+                        question: query
+                    })
+                });
+
+                const data = await res.json();
+                document.getElementById('results-panel').classList.remove('hidden');
+                document.getElementById('res-markdown').innerHTML = marked.parse(data.ai_answer || "No response generated.");
+            } catch (err) {
+                alert("Query error: " + err);
+            } finally {
+                btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Ask AI`;
+                btn.disabled = false;
+            }
+        }
+
+        // Drag and drop for additional videos
+        const dropzone = document.getElementById('video-dropzone');
+        const fileInput = document.getElementById('video-file-input');
+        dropzone.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', async () => {
+            if (fileInput.files.length > 0) {
+                const formData = new FormData();
+                formData.append('file', fileInput.files[0]);
+                formData.append('question', document.getElementById('query-input').value.trim() || "Analyze this video and extract Re-ID features.");
+
+                try {
+                    const res = await fetch('/api/v1/video/upload-and-analyze', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const data = await res.json();
+                    document.getElementById('results-panel').classList.remove('hidden');
+                    document.getElementById('res-markdown').innerHTML = marked.parse(data.ai_answer || "Ingested successfully.");
+                } catch (e) {
+                    alert("Upload error: " + e);
+                }
+            }
+        });
+
+        // Initialize
+        loadTrackedPersons();
+    </script>
+</body>
+</html>

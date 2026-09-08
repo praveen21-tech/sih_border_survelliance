@@ -1,0 +1,32 @@
+# Python Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+backend/.venv/
+
+# Large Model Weights & Data Storage
+data/models/
+data/evidence/
+data/field_samples/
+data/*.sqlite3
+*.sqlite3
+*.db
+*.bin
+*.pt
+*.onnx
+*.engine
+
+# Cache & Build files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.dll
+*.pyd
+
+# IDE & OS Files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
